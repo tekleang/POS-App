@@ -1,3 +1,16 @@
-<p>
-  sign-in works!
-</p>
+<div *ngIf="afAuth.user | async as user; else showLogin">
+      <h1>Hello {{ user.displayName }}!</h1>
+      <button (click)="logout()">Logout</button>
+    </div>
+    <ng-template #showLogin>
+      <p>Please login.</p>
+      <button (click)="login()">Login with Google</button>
+    </ng-template>
+
+<form [formGroup]="form">
+  <label>Email</label>
+  <input type="email" formControlName="email">
+  <label>Password</label>
+  <input type="Password" formControlName="password">
+  <button (click)="signInWidthEmail(form.value)">Sign In</button>
+</form>
